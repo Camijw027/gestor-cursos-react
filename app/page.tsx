@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Curso } from "./types/curso";
 import Buscador from "./components/Buscador";
 import Filtros from "./components/Filtros";
+import CursoItem from "./components/CursoItem";
 
 export default function Inicio() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -44,62 +45,16 @@ export default function Inicio() {
       <Filtros filtro={filtro} setFiltro={setFiltro} />
 
       {cursosFiltrados.map((curso) => (
-        <div key={curso.id}>
-          {editandoId === curso.id ? (
-            <input
-              value={nombreEditado}
-              onChange={(e) => setNombreEditado(e.target.value)}
-              placeholder="Editar nombre del curso"
-            />
-          ) : (
-            <span className={curso.completado ? "completado" : ""}>
-              {curso.nombre}
-            </span>
-          )}
-          {editandoId === curso.id ? (
-            <button
-              onClick={() => {
-                setCursos(
-                  cursos.map((c) =>
-                    c.id === curso.id ? { ...c, nombre: nombreEditado } : c,
-                  ),
-                );
-                setEditandoId(null);
-              }}
-            >
-              Guardar
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                setEditandoId(curso.id);
-                setNombreEditado(curso.nombre);
-              }}
-            >
-              Editar
-            </button>
-          )}
-
-          <button
-            onClick={() => {
-              setCursos(
-                cursos.map((c) =>
-                  c.id === curso.id ? { ...c, completado: !c.completado } : c,
-                ),
-              );
-            }}
-          >
-            {curso.completado
-              ? "Marcar como pendiente"
-              : "Marcar como completado"}
-          </button>
-
-          <button
-            onClick={() => setCursos(cursos.filter((c) => c.id !== curso.id))}
-          >
-            Eliminar
-          </button>
-        </div>
+        <CursoItem
+          key={curso.id}
+          curso={curso}
+          cursos={cursos}
+          setCursos={setCursos}
+          editandoId={editandoId}
+          setEditandoId={setEditandoId}
+          nombreEditado={nombreEditado}
+          setNombreEditado={setNombreEditado}
+        />
       ))}
     </main>
   );

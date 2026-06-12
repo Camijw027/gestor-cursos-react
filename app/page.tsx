@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Curso } from "./types/curso";
 import Buscador from "./components/Buscador";
+import Filtros from "./components/Filtros";
 
 export default function Inicio() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -40,9 +41,7 @@ export default function Inicio() {
 
       <Buscador busqueda={busqueda} setBusqueda={setBusqueda} />
 
-      <button onClick={() => setFiltro("todos")}>Todos</button>
-      <button onClick={() => setFiltro("completados")}>Completados</button>
-      <button onClick={() => setFiltro("pendientes")}>Pendientes</button>
+      <Filtros filtro={filtro} setFiltro={setFiltro} />
 
       {cursosFiltrados.map((curso) => (
         <div key={curso.id}>

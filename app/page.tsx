@@ -4,6 +4,7 @@ import { Curso } from "./types/curso";
 import Buscador from "./components/Buscador";
 import Filtros from "./components/Filtros";
 import CursoItem from "./components/CursoItem";
+import FormAgregar from "./components/FormAgregar";
 
 export default function Inicio() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -24,21 +25,13 @@ export default function Inicio() {
   return (
     <main>
       <h1>Gestor de Cursos</h1>
-      <input
-        type="text"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        placeholder="Nombre del curso"
+
+      <FormAgregar
+        nombre={nombre}
+        setNombre={setNombre}
+        cursos={cursos}
+        setCursos={setCursos}
       />
-      <button
-        onClick={() => {
-          if (!nombre) return;
-          setCursos([...cursos, { id: Date.now(), nombre, completado: false }]);
-          setNombre("");
-        }}
-      >
-        Agregar Curso
-      </button>
 
       <Buscador busqueda={busqueda} setBusqueda={setBusqueda} />
 

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Curso } from "./types/curso";
+import Buscador from "./components/Buscador";
 
 export default function Inicio() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -37,11 +38,8 @@ export default function Inicio() {
         Agregar Curso
       </button>
 
-      <input
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        placeholder="Buscar cursos..."
-      />
+      <Buscador busqueda={busqueda} setBusqueda={setBusqueda} />
+
       <button onClick={() => setFiltro("todos")}>Todos</button>
       <button onClick={() => setFiltro("completados")}>Completados</button>
       <button onClick={() => setFiltro("pendientes")}>Pendientes</button>

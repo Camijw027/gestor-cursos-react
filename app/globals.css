@@ -228,3 +228,19 @@ body {
 .btn-eliminar:hover {
   background-color: #dc2626;
 }
+
+/* ─── Botón cerrar sesión ─── */
+.btn-cerrar-sesion {
+  background-color: #ef4444;
+  color: rgb(254, 255, 253);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: #dc2626;
+}

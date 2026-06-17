@@ -1,5 +1,7 @@
 import { Curso } from "../types/curso";
 
+// Este componente representa una sola fila de curso en la lista.
+// Se renderiza una vez por cada curso que exista en el estado.
 type CursoItemProps = {
   curso: Curso;
   cursos: Curso[];
@@ -20,59 +22,78 @@ export default function CursoItem({
   setNombreEditado,
 }: CursoItemProps) {
   return (
-    <div>
+    <div className="curso-card">
+      {/* Si este curso está siendo editado mostramos un input,
+          si no, mostramos el nombre como texto normal */}
       {editandoId === curso.id ? (
         <input
+          className="input-editar"
           type="text"
           value={nombreEditado}
           onChange={(e) => setNombreEditado(e.target.value)}
           placeholder="Editar nombre del curso"
         />
       ) : (
-        <span className={curso.completado ? "completado" : ""}>
+        <span
+          className={
+            curso.completado ? "curso-nombre completado" : "curso-nombre"
+          }
+        >
           {curso.nombre}
         </span>
       )}
-      {editandoId === curso.id ? (
+      {/* Agrupamos los tres botones de acción a la derecha de la card */}
+      <div className="curso-botones">
+        {/* En modo edición muestra "Guardar", en modo normal muestra "Editar" */}
+        {editandoId === curso.id ? (
+          <button
+            className="btn-guardar"
+            onClick={() => {
+              setCursos(
+                cursos.map((c) =>
+                  c.id === curso.id ? { ...c, nombre: nombreEditado } : c,
+                ),
+              );
+              setEditandoId(null);
+            }}
+          >
+            Guardar
+          </button>
+        ) : (
+          <button
+            className="btn-editar"
+            onClick={() => {
+              setEditandoId(curso.id);
+              setNombreEditado(curso.nombre);
+            }}
+          >
+            Editar
+          </button>
+        )}
+
+        {/* Alterna el estado del curso entre completado y pendiente */}
         <button
+          className="btn-completar"
           onClick={() => {
             setCursos(
               cursos.map((c) =>
-                c.id === curso.id ? { ...c, nombre: nombreEditado } : c,
+                c.id === curso.id ? { ...c, completado: !c.completado } : c,
               ),
             );
-            setEditandoId(null);
           }}
         >
-          Guardar
+          {curso.completado
+            ? "Marcar como pendiente"
+            : "Marcar como completado"}
         </button>
-      ) : (
+        {/* Elimina el curso filtrando todos los que NO sean este */}
         <button
-          onClick={() => {
-            setEditandoId(curso.id);
-            setNombreEditado(curso.nombre);
-          }}
+          className="btn-eliminar"
+          onClick={() => setCursos(cursos.filter((c) => c.id !== curso.id))}
         >
-          Editar
+          Eliminar
         </button>
-      )}
-
-      <button
-        onClick={() => {
-          setCursos(
-            cursos.map((c) =>
-              c.id === curso.id ? { ...c, completado: !c.completado } : c,
-            ),
-          );
-        }}
-      >
-        {curso.completado ? "Marcar como pendiente" : "Marcar como completado"}
-      </button>
-      <button
-        onClick={() => setCursos(cursos.filter((c) => c.id !== curso.id))}
-      >
-        Eliminar
-      </button>
+      </div>
     </div>
   );
 }

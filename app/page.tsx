@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Curso } from "./types/curso";
 import Buscador from "./components/Buscador";
 import Filtros from "./components/Filtros";
@@ -28,6 +29,16 @@ export default function Inicio() {
   // Guarda el texto nuevo mientras el usuario edita un curso
   const [nombreEditado, setNombreEditado] = useState("");
 
+  // Al cargar la página revisamos si hay sesión activa.
+  // Si no hay, mandamos al usuario a la página de login.
+  const router = useRouter();
+  useEffect(() => {
+    const sesion = localStorage.getItem("sesion");
+    if (!sesion) {
+      router.push("/login");
+    }
+  }, []);
+
   // Aquí aplicamos dos filtros seguidos sobre la lista de cursos:
   // primero filtramos por lo que el usuario escribe en el buscador,
   // y luego filtramos por el botón de filtro que tenga activo
@@ -43,17 +54,32 @@ export default function Inicio() {
     <main className="contenedor-principal">
       <h1 className="titulo-app">Gestor de Cursos</h1>
 
+      {/* Este botón cierra la sesión actual y manda al usuario a login */}
+      <button
+        className="btn-cerrar-sesion"
+        onClick={() => {
+          localStorage.removeItem("sesion");
+          router.push("/login");
+        }}
+      >
+        Cerrar sesión
+      </button>
+
+      {/* Este componente es el formulario para agregar un nuevo curso. */}
       <FormAgregar
         nombre={nombre}
         setNombre={setNombre}
         cursos={cursos}
         setCursos={setCursos}
       />
-
+      {/* Este componente es el buscador que filtra los cursos por nombre */}
       <Buscador busqueda={busqueda} setBusqueda={setBusqueda} />
 
+      {/* Este componente muestra los botones para filtrar los cursos */}
       <Filtros filtro={filtro} setFiltro={setFiltro} />
 
+      {/* Aquí mostramos la lista de cursos, aplicando los filtros que el usuario
+      haya seleccionado */}
       {cursosFiltrados.map((curso) => (
         <CursoItem
           key={curso.id}

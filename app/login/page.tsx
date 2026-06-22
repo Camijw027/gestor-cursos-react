@@ -28,27 +28,34 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h1>Iniciar sesión</h1>
+    <div className="contenedor-login">
+      <div className="login-principal">
+        <div className="icono-login">🔒</div>
+        <h1 className="login-titulo">Iniciar sesión</h1>
 
-      <input
-        type="text"
-        placeholder="Usuario"
-        value={usuario}
-        onChange={(e) => setUsuario(e.target.value)}
-      />
+        <input
+          className="input-usuario"
+          type="text"
+          placeholder="Usuario"
+          value={usuario}
+          onChange={(e) => setUsuario(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={contrasena}
-        onChange={(e) => setContrasena(e.target.value)}
-      />
+        <input
+          className="input-contraseña"
+          type="password"
+          placeholder="Contraseña"
+          value={contrasena}
+          onChange={(e) => setContrasena(e.target.value)}
+        />
 
-      {/* Solo mostramos el error si el usuario intentó entrar con datos incorrectos */}
-      {error && <p>Usuario o contraseña incorrectos</p>}
+        {/* Solo mostramos el error si el usuario intentó entrar con datos incorrectos */}
+        {error && <p className="error">Usuario o contraseña incorrectos</p>}
 
-      <button onClick={manejarLogin}>Entrar</button>
+        <button className="btn-entrar" onClick={manejarLogin}>
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }

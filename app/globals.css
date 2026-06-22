@@ -45,6 +45,11 @@ body {
   font-weight: 700;
   color: #460cab;
   margin-bottom: 24px;
+  border-bottom: 2px solid #460cab;
+  padding-bottom: 16px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
 }
 
 /* ─── Formulario agregar ─── */
@@ -151,6 +156,12 @@ body {
   max-width: 600px;
 }
 
+.curso-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
 /* ─── Nombre del curso dentro del item ─── */
 .curso-nombre {
   flex: 1;
@@ -187,8 +198,8 @@ body {
 }
 
 .btn-editar {
-  background-color: #f59e0b;
-  color: white;
+  background-color: #0f0d79;
+  color: rgb(235, 224, 224);
   border: none;
   border-radius: 6px;
   padding: 6px 12px;
@@ -208,7 +219,7 @@ body {
 
 .btn-eliminar {
   background-color: #ef4444;
-  color: white;
+  color: rgb(255, 251, 251);
   border: none;
   border-radius: 6px;
   padding: 6px 12px;
@@ -217,7 +228,7 @@ body {
 }
 
 .btn-editar:hover {
-  background-color: #d97706;
+  background-color: #0f0d79b7;
 }
 .btn-guardar:hover {
   background-color: #d97706;
@@ -238,9 +249,101 @@ body {
   padding: 6px 14px;
   font-size: 0.85rem;
   cursor: pointer;
-  margin-bottom: 16px;
+  position: fixed;
+  top: 16px;
+  right: 16px;
 }
 
 .btn-cerrar-sesion:hover {
   background-color: #dc2626;
+}
+
+/* Aca se agregan los estilos para el login, como el fondo, los margenes y los inputs de usuario y contraseña */
+
+.contenedor-login {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #b7c1ee 0%, #71538c 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+}
+.login-principal {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
+  justify-content: center;
+}
+
+.login-titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #460cab;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.input-usuario {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  color: #374151;
+}
+.input-usuario:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.input-contraseña {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #28ee9b;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  color: #374151;
+}
+.input-contraseña:focus {
+  border-color: #81cf0d;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.btn-entrar {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-entrar:hover {
+  background-color: #1d4ed8;
+}
+
+.error {
+  color: #d12121cd;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.icono-login {
+  width: 64px;
+  height: 64px;
+  background-color: #2563eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
 }

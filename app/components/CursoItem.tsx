@@ -11,7 +11,8 @@ type CursoItemProps = {
   nombreEditado: string;
   setNombreEditado: (nombre: string) => void;
 };
-
+// Recibe el curso a mostrar, la lista completa de cursos y las funciones para modificar el estado de cursos y edición. Esto le permite modificar
+// el curso actual sin necesidad de manejar estados locales dentro del componente.
 export default function CursoItem({
   curso,
   cursos,
